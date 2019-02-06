@@ -1,4 +1,7 @@
+exclude *.pyc *~ *.so .DS_Store
 include CHANGES
 include LICENSE
 include README.rst
-recursive-include swatch/tests *.json *.ase *.py
+include setup.py
+recursive-include swatch *.py
+recursive-include tests *.json *.ase *.py
