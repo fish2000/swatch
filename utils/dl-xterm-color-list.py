@@ -77,10 +77,7 @@ def scrape(url, fixtures_dir):
         tds = tuple(tr.children)
         assert len(tds) == 6
         color_dict = tds_to_dictionary(tds)
-        # scraped.update({ color_dict.get('name',
-        #                  color_dict.get('hex')) : color_dict })
         scraped.append(color_dict)
-    
     assert len(scraped) == 256
     
     # print(json.dumps(scraped, indent=4))
@@ -94,7 +91,6 @@ def scrape(url, fixtures_dir):
     buffer_size = -1
     descriptor, filename = tempfile.mkstemp(suffix=".json")
     with os.fdopen(descriptor, mode, buffer_size) as handle:
-        # handle.write(json.dumps())
         json.dump(output, handle)
         handle.flush()
     
