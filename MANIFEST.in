@@ -1,5 +1,7 @@
 exclude *.pyc *~ *.so .DS_Store
 include .bumpversion.cfg
+include .editorconfig
+include .gitattributes
 include .gitignore
 include CHANGES
 include LICENSE
