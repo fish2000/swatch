@@ -1,7 +1,7 @@
 # encoding: utf-8
 """
 swatch, a parser for adobe swatch exchange files
-Copyright (c) 2014 Marcos A Ojeda http://generic.cx/
+Copyright (c) 2014 Marcos A. Ojeda http://generic.cx/
 
 With notes from
 http://iamacamera.org/default.aspx?id=109 by Carl Camera and
@@ -47,7 +47,7 @@ def parse(filename):
         The values provided vary between color mode. For all color modes, the
         value is always a ``list`` of floats. Valid ASE color modes are:
         
-        RGB: three floats between [0, 1]  corresponding to RGB.
+        RGB: three floats between [0, 1] corresponding to RGB.
         CMYK: four floats between [0, 1] inclusive, corresponding to CMYK.
         Gray: one float between [0, 1] with 1 being white, 0 being black.
         LAB: three floats. The first, L, is ranged from [0, 1]. Both A and B are

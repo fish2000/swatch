@@ -5,7 +5,7 @@ swatch.tests
 Solarized color palette using LAB data from
 http://ethanschoonover.com/solarized
 
-Copyright (c) 2014 Marcos A Ojeda http://generic.cx/
+Copyright (c) 2014 Marcos A. Ojeda http://generic.cx/
 All Rights Reserved
 MIT Licensed, see LICENSE.TXT for details
 """
@@ -16,7 +16,7 @@ class TestSwatchParser(unittest.TestCase):
     
     def compare_with_json(self, basepath):
         import swatch, os, json
-        base = os.path.join("tests", basepath)
+        base = os.path.join("tests", "fixtures", basepath)
         with open(base + ".json") as handle:
             ase = swatch.parse(base + ".ase")
             js = json.load(handle)
@@ -47,7 +47,7 @@ class TestSwatchWriter(unittest.TestCase):
     
     def compare_with_ase(self, basepath):
         import swatch, os, json
-        base = os.path.join("tests", basepath)
+        base = os.path.join("tests", "fixtures", basepath)
         with open(base + ".json") as swatch_data:
             generated_ase = swatch.dumps(json.load(swatch_data))
         with open(base + ".ase", 'rb') as raw_ase:
