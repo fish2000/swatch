@@ -4,7 +4,7 @@ import codecs
 from swatch import __version__ as VERSION
 
 README = codecs.open('README.rst', encoding='utf-8').read()
-LICENSE = codecs.open('LICENSE', encoding='utf-8').read()
+LICENSE = codecs.open('LICENSE.txt', encoding='utf-8').read()
 
 setup(
     name='swatch',

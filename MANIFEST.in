@@ -3,8 +3,8 @@ include .bumpversion.cfg
 include .editorconfig
 include .gitattributes
 include .gitignore
-include CHANGES
-include LICENSE
+include CHANGES.txt
+include LICENSE.txt
 include README.rst
 include setup.py
 recursive-include swatch *.py
