@@ -1,4 +1,5 @@
 exclude *.pyc *~ *.so .DS_Store
+include .gitignore
 include CHANGES
 include LICENSE
 include README.rst
