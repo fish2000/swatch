@@ -13,7 +13,7 @@ MIT Licensed, see LICENSE.TXT for details
 
 
 __title__ = 'swatch'
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 __author__ = 'Marcos Ojeda'
 __license__ = 'MIT'
 __copyright__ = '© 2014 Marcos A. Ojeda'
