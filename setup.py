@@ -12,7 +12,7 @@ setup(
     author='Marcos A. Ojeda',
     author_email='marcos@generic.cx',
     url='http://github.com/nsfmc/swatch',
-    packages=['swatch', 'tests'],
+    packages=['swatch', 'tests', 'utils'],
     package_data={ '' : ['*.*'] },
     include_package_data=True,
     license=LICENSE,
