@@ -1,11 +1,11 @@
 # encoding: utf-8
 """
-swatch.tests
+swatch.tests.test_writer
 
 Solarized color palette using LAB data from
 http://ethanschoonover.com/solarized
 
-Copyright (c) 2014 Marcos A. Ojeda http://generic.cx/
+Copyright (c) 2019 Marcos A. Ojeda http://generic.cx/
 All Rights Reserved
 MIT Licensed, see LICENSE.TXT for details
 """
