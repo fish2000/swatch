@@ -9,10 +9,17 @@ Copyright (c) 2014 Marcos A. Ojeda http://generic.cx/
 All Rights Reserved
 MIT Licensed, see LICENSE.TXT for details
 """
+from __future__ import print_function
+
+import pytest
 import unittest
 
 class TestSwatchParser(unittest.TestCase):
     """ Tests for parser.py """
+    
+    def setUp(self):
+        super(TestSwatchParser, self).setUp()
+        self.maxDiff = 10000
     
     def compare_with_json(self, basepath):
         import swatch, os, json
@@ -40,10 +47,21 @@ class TestSwatchParser(unittest.TestCase):
     
     def test_RGB(self):
         js, ase = self.compare_with_json("sampler")
-        self.assertEqual(js, ase, "RGB test fails with sampler")
+        self.assertEqual(js, ase, "RGB parser test fails with sampler")
+    
+    def test_xterm_colors(self):
+        numpy = pytest.importorskip('numpy')
+        js, ase = self.compare_with_json("xterm colors")
+        # self.assertEqual(js, ase, "XTerm colors compare unequal in parser test")
+        numpy.testing.assert_almost_equal([item['data']['values'] for item in js[0]['swatches']],
+                                          [item['data']['values'] for item in ase[0]['swatches']])
 
 class TestSwatchWriter(unittest.TestCase):
     """ Tests for writer.py """
+    
+    def setUp(self):
+        super(TestSwatchWriter, self).setUp()
+        self.maxDiff = 1000
     
     def compare_with_ase(self, basepath):
         import swatch, os, json
@@ -63,15 +81,19 @@ class TestSwatchWriter(unittest.TestCase):
     
     def test_empty_file(self):
         raw, generated = self.compare_with_ase("empty white folder")
-        self.assertEqual(raw, generated, "empty named folder no longer parses")
+        self.assertEqual(raw, generated, "empty named folder no longer writes")
     
     def test_single_swatch_in_folder(self):
         raw, generated = self.compare_with_ase("single white swatch in folder")
-        self.assertEqual(raw, generated, "folder with one swatch no longer parses")
+        self.assertEqual(raw, generated, "folder with one swatch no longer writes")
     
     def test_RGB(self):
         raw, generated = self.compare_with_ase("sampler")
-        self.assertEqual(raw, generated, "RGB test fails with sampler")
+        self.assertEqual(raw, generated, "RGB writer test fails with sampler")
+    
+    def test_xterm_colors(self):
+        raw, generated = self.compare_with_ase("xterm colors")
+        self.assertEqual(raw, generated, "XTerm colors compare unequal in writer test")
 
 if __name__ == '__main__':
     unittest.main()

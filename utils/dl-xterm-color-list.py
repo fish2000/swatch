@@ -2,9 +2,14 @@
 # encoding: utf-8
 from __future__ import print_function
 
-import requests
 import json
 import math
+import os
+import requests
+import shutil
+import swatch
+import tempfile
+
 from bs4 import BeautifulSoup
 
 try:
@@ -53,13 +58,13 @@ def scraped_to_ase(scraped_color):
                data=dict(mode='RGB', values=values))
     return out
 
-def scrape(url):
+def scrape(url, fixtures_dir):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, features='lxml')
     scraped = {}
-    output = { 'name'       : 'XTerm Colors',
-               'type'       : 'Color Group',
-               'swatches'   : [] }
+    output = [{ 'name'      : 'XTerm Colors',
+                'type'      : 'Color Group',
+                'swatches'  : [] }]
     
     # get all table rows:
     alltrs = soup.findAll(name='tr')
@@ -77,12 +82,33 @@ def scrape(url):
     # print(json.dumps(scraped, indent=4))
     
     for infodict in scraped.values():
-        output['swatches'].append(scraped_to_ase(infodict))
+        output[0]['swatches'].append(scraped_to_ase(infodict))
     
     print(json.dumps(output, indent=4))
     
+    mode = "w"
+    buffer_size = -1
+    descriptor, filename = tempfile.mkstemp(suffix=".json")
+    with os.fdopen(descriptor, mode, buffer_size) as handle:
+        # handle.write(json.dumps())
+        json.dump(output, handle)
+        handle.flush()
+    
+    shutil.copy2(os.path.join(tempfile.gettempdir(), filename),
+                 os.path.join(fixtures_dir, 'xterm colors.json'))
+    
+    mode = "wb"
+    descriptor, filename = tempfile.mkstemp(suffix=".ase")
+    with os.fdopen(descriptor, mode, buffer_size) as handle:
+        with open(os.path.join(fixtures_dir, 'xterm colors.json'), "r") as jsonhandle:
+            swatch.dump(json.load(jsonhandle), handle)
+            handle.flush()
+    
+    shutil.copy2(os.path.join(tempfile.gettempdir(), filename),
+                 os.path.join(fixtures_dir, 'xterm colors.ase'))
 
 URL = 'https://jonasjacek.github.io/colors/'
+FIXTURES = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'tests', 'fixtures')
 
 if __name__ == '__main__':
-    scrape(URL)
+    scrape(URL, FIXTURES)
