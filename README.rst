@@ -19,10 +19,10 @@ and outputs a ``.ase`` file.
 ``list`` of colors and palettes. Colors are ``dicts`` in the form::
 
     {
-        'name': u'color name',
-        'type': u'Process',
+        'name': 'color name',
+        'type': 'Process',
         'data': {
-            'mode': u'RGB',
+            'mode': 'RGB',
             'values': [1.0, 1.0, 1.0]
         }
     }
@@ -42,8 +42,8 @@ item named ``swatches`` which contains a ``list`` of colors (as above) in
 the palette.::
 
     {
-        'name': u'accent colors',
-        'type': u'Color Group',
+        'name': 'accent colors',
+        'type': 'Color Group',
         'swatches': [
             {color}, {color}, ..., {color}
         ]
@@ -58,28 +58,28 @@ color group containing three more swatches::
 
     >>> import swatch
     >>> swatch.parse("example.ase")
-    [{'data': {'mode': u'Gray', 'values': [0.75]},
-      'name': u'Light Grey',
-      'type': u'Process'},
-     {'name': u'Accent Colors',
-      'swatches': [{'data': {'mode': u'CMYK',
+    [{'data': {'mode': 'Gray', 'values': [0.75]},
+      'name': 'Light Grey',
+      'type': 'Process'},
+     {'name': 'Accent Colors',
+      'swatches': [{'data': {'mode': 'CMYK',
          'values': [0.5279774069786072,
           0.24386966228485107,
           1.0,
           0.04303044080734253]},
-        'name': u'Green',
-        'type': u'Process'},
-       {'data': {'mode': u'CMYK',
+        'name': 'Green',
+        'type': 'Process'},
+       {'data': {'mode': 'CMYK',
          'values': [0.6261844635009766,
           0.5890134572982788,
           3.051804378628731e-05,
           3.051804378628731e-05]},
-        'name': u'Violet Process Global',
-        'type': u'Global'},
-       {'data': {'mode': u'LAB', 'values': [0.6000000238418579, -35.0, -5.0]},
-        'name': u'Cyan Spot (global)',
-        'type': u'Spot'}],
-      'type': u'Color Group'}]
+        'name': 'Violet Process Global',
+        'type': 'Global'},
+       {'data': {'mode': 'LAB', 'values': [0.6000000238418579, -35.0, -5.0]},
+        'name': 'Cyan Spot (global)',
+        'type': 'Spot'}],
+      'type': 'Color Group'}]
 
 Spot, Global and Process Colors
 -------------------------------

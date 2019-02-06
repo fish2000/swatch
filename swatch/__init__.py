@@ -28,40 +28,40 @@ V_MAJOR = 1
 V_MINOR = 0
 
 def parse(filename):
-    """ Parses a .ase file and returns a list of colors and color groups
+    """ Parses a ``.ase`` file and returns a list of colors and color groups
         
-        `swatch.parse` reads in an ase file and converts it to a list of colors and
-        palettes. colors are simple dicts of the form
+        `swatch.parse(…)` reads in an ``.ase`` file and converts it to a list
+        of colors and palettes. Colors are ``dict``s of the form
         
         ```json
         {
-            'name': u'color name',
-            'type': u'Process',
+            'name': 'color name',
+            'type': 'Process',
             'data': {
-                'mode': u'RGB',
+                'mode': 'RGB',
                 'values': [1.0, 1.0, 1.0]
             }
         }
         ```
         
         The values provided vary between color mode. For all color modes, the
-        value is always a list of floats.
+        value is always a ``list`` of floats. Valid ASE color modes are:
         
-        RGB: three floats between [0,1]  corresponding to RGB.
-        CMYK: four floats between [0,1] inclusive, corresponding to CMYK.
-        Gray: one float between [0,1] with 1 being white, 0 being black.
-        LAB: three floats. The first L, is ranged from 0,1. Both A and B are
-        floats ranging from [-128.0,127.0]. I believe illustrator just crops
+        RGB: three floats between [0, 1]  corresponding to RGB.
+        CMYK: four floats between [0, 1] inclusive, corresponding to CMYK.
+        Gray: one float between [0, 1] with 1 being white, 0 being black.
+        LAB: three floats. The first, L, is ranged from [0, 1]. Both A and B are
+        floats ranging from [-128.0, 127.0]. I believe Illustrator just crops
         these to whole values, though.
         
-        Palettes (née Color Groups in Adobe Parlance) are also dicts, but they have an
-        attribute named `swatches` which contains a list of colors contained within
+        Palettes (née Color Groups in Adobe parlance) are also ``dicts``, but they have an
+        item named “swatches” which contains a ``list`` of colors contained within
         the palette.
         
         ```json
         {
-            'name': u'accent colors',
-            'type': u'Color Group',
+            'name': 'accent colors',
+            'type': 'Color Group',
             'swatches': [
                 {color}, {color}, ..., {color}
             ]
@@ -77,28 +77,28 @@ def parse(filename):
         
             >>> import swatch
             >>> swatch.parse("example.ase")
-            [{'data': {'mode': u'Gray', 'values': [0.75]},
-              'name': u'Light Grey',
-              'type': u'Process'},
-             {'name': u'Accent Colors',
-              'swatches': [{'data': {'mode': u'CMYK',
+            [{'data': {'mode': 'Gray', 'values': [0.75]},
+              'name': 'Light Grey',
+              'type': 'Process'},
+             {'name': 'Accent Colors',
+              'swatches': [{'data': {'mode': 'CMYK',
                  'values': [0.5279774069786072,
                   0.24386966228485107,
                   1.0,
                   0.04303044080734253]},
-                'name': u'Green',
-                'type': u'Process'},
-               {'data': {'mode': u'CMYK',
+                'name': 'Green',
+                'type': 'Process'},
+               {'data': {'mode': 'CMYK',
                  'values': [0.6261844635009766,
                   0.5890134572982788,
                   3.051804378628731e-05,
                   3.051804378628731e-05]},
-                'name': u'Violet Process Global',
-                'type': u'Global'},
-               {'data': {'mode': u'LAB', 'values': [0.6000000238418579, -35.0, -5.0]},
-                'name': u'Cyan Spot (global)',
-                'type': u'Spot'}],
-              'type': u'Color Group'}]
+                'name': 'Violet Process Global',
+                'type': 'Global'},
+               {'data': {'mode': 'LAB', 'values': [0.6000000238418579, -35.0, -5.0]},
+                'name': 'Cyan Spot (global)',
+                'type': 'Spot'}],
+              'type': 'Color Group'}]
     """
     with open(filename, "rb") as data:
         header, v_major, v_minor, chunk_count = struct.unpack("!4sHHI", data.read(12))
