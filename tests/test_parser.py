@@ -56,6 +56,8 @@ class TestSwatchParser(unittest.TestCase):
         assert len(ase[0]['swatches']) == 256
         numpy.testing.assert_almost_equal([item['data']['values'] for item in js[0]['swatches']],
                                           [item['data']['values'] for item in ase[0]['swatches']])
+        numpy.testing.assert_allclose([item['data']['values'] for item in js[0]['swatches']],
+                                      [item['data']['values'] for item in ase[0]['swatches']])
         js[0]['swatches'] = []
         ase[0]['swatches'] = []
         self.assertEqual(js, ase, "XTerm color dict stubs compare unequal in parser test")

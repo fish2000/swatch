@@ -9,5 +9,7 @@ include README.rst
 include setup.py
 recursive-include requirements *.txt
 recursive-include swatch *.py
+recursive-include swatches/ase *.ase
+recursive-include swatches/html *.html
 recursive-include utils *.py
 recursive-include tests *.json *.ase *.py
