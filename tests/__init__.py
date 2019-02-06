@@ -52,9 +52,13 @@ class TestSwatchParser(unittest.TestCase):
     def test_xterm_colors(self):
         numpy = pytest.importorskip('numpy')
         js, ase = self.compare_with_json("xterm colors")
-        # self.assertEqual(js, ase, "XTerm colors compare unequal in parser test")
+        assert len(js[0]['swatches']) > 10
+        assert len(ase[0]['swatches']) > 10
         numpy.testing.assert_almost_equal([item['data']['values'] for item in js[0]['swatches']],
                                           [item['data']['values'] for item in ase[0]['swatches']])
+        js[0]['swatches'] = []
+        ase[0]['swatches'] = []
+        self.assertEqual(js, ase, "XTerm color dict stubs compare unequal in parser test")
 
 class TestSwatchWriter(unittest.TestCase):
     """ Tests for writer.py """
