@@ -1,8 +1,7 @@
 -r install.txt
+-r test.txt
 bs4
 bumpversion
-numpy
-pytest
 requests
 setuptools
 twine
