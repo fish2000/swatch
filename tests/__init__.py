@@ -10,15 +10,12 @@ All Rights Reserved
 MIT Licensed, see LICENSE.TXT for details
 """
 import unittest
-import os
-import swatch
-import json
-
 
 class TestSwatchParser(unittest.TestCase):
     """ Tests for parser.py """
     
     def compare_with_json(self, basepath):
+        import swatch, os, json
         base = os.path.join("tests", basepath)
         with open(base + ".json") as handle:
             ase = swatch.parse(base + ".ase")
@@ -45,11 +42,11 @@ class TestSwatchParser(unittest.TestCase):
         js, ase = self.compare_with_json("sampler")
         self.assertEqual(js, ase, "RGB test fails with sampler")
 
-
 class TestSwatchWriter(unittest.TestCase):
     """ Tests for writer.py """
     
     def compare_with_ase(self, basepath):
+        import swatch, os, json
         base = os.path.join("tests", basepath)
         with open(base + ".json") as swatch_data:
             generated_ase = swatch.dumps(json.load(swatch_data))
@@ -75,7 +72,6 @@ class TestSwatchWriter(unittest.TestCase):
     def test_RGB(self):
         raw, generated = self.compare_with_ase("sampler")
         self.assertEqual(raw, generated, "RGB test fails with sampler")
-
 
 if __name__ == '__main__':
     unittest.main()
