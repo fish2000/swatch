@@ -52,8 +52,8 @@ class TestSwatchParser(unittest.TestCase):
     def test_xterm_colors(self):
         numpy = pytest.importorskip('numpy')
         js, ase = self.compare_with_json("xterm colors")
-        assert len(js[0]['swatches']) == 202
-        assert len(ase[0]['swatches']) == 202
+        assert len(js[0]['swatches']) == 256
+        assert len(ase[0]['swatches']) == 256
         numpy.testing.assert_almost_equal([item['data']['values'] for item in js[0]['swatches']],
                                           [item['data']['values'] for item in ase[0]['swatches']])
         js[0]['swatches'] = []

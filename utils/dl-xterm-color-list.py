@@ -61,7 +61,7 @@ def scraped_to_ase(scraped_color):
 def scrape(url, fixtures_dir):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, features='lxml')
-    scraped = {}
+    scraped = []
     output = [{ 'name'      : 'XTerm Colors',
                 'type'      : 'Color Group',
                 'swatches'  : [] }]
@@ -77,11 +77,15 @@ def scrape(url, fixtures_dir):
         tds = tuple(tr.children)
         assert len(tds) == 6
         color_dict = tds_to_dictionary(tds)
-        scraped.update({ color_dict.get('name') : color_dict })
+        # scraped.update({ color_dict.get('name',
+        #                  color_dict.get('hex')) : color_dict })
+        scraped.append(color_dict)
+    
+    assert len(scraped) == 256
     
     # print(json.dumps(scraped, indent=4))
     
-    for infodict in scraped.values():
+    for infodict in scraped:
         output[0]['swatches'].append(scraped_to_ase(infodict))
     
     print(json.dumps(output, indent=4))
