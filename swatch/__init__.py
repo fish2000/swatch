@@ -16,7 +16,7 @@ __title__ = 'swatch'
 __version__ = '0.4.0'
 __author__ = 'Marcos Ojeda'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2014 Marcos A Ojeda'
+__copyright__ = '© 2014 Marcos A. Ojeda'
 
 
 from . import parser
